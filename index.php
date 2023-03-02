@@ -3,19 +3,14 @@ namespace index;
 require_once  __DIR__.'/vendor/autoload.php';
 
 use Core\Router;
-use Commerce\Commerce;
 use Datainterface\Tables;
 use Datainterface\Database;
 use ErrorLogger\ErrorLogger;
-use ExcelHandler\ExcelHandler;
-use Faker\FakerOrganisation;
-use Faker\FakerProducts;
-use Faker\FakerUsers;
 use GlobalsFunctions\Globals;
 use ApiHandler\ApiHandlerClass;
 use MiddlewareSecurity\Security;
 use ConfigurationSetting\ConfigureSetting;
-use MyShop\ProductRender;
+
 
 // enable these two line to show error on web page
 //error_reporting(E_ALL);
