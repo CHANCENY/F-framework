@@ -4,6 +4,7 @@ namespace Core;
 
 use Alerts\Alerts;
 use ConfigurationSetting\ConfigureSetting;
+use ErrorLogger\ErrorLogger;
 use MiddlewareSecurity\Security;
 use Modules\SettingWeb;
 use Sessions\SessionManager;
@@ -367,6 +368,12 @@ class Router
         $views = json_decode(file_get_contents($storage), true);
         switch ($code){
             case 404:
+                $error = [
+                    'code'=>404,
+                    'message'=>"Requested Page not found",
+                    'location'=>$_SERVER['PHP_SELF']
+                ];
+                ErrorLogger::log(null,$error);
                 $foundViews = [];
                 foreach ($views as $view){
                     if($view['view_url'] === '404'){
@@ -377,6 +384,12 @@ class Router
                 self::requiringFile($foundViews);
                 break;
             case 500:
+                $error = [
+                    'code'=>500,
+                    'message'=>"Server error occured",
+                    'location'=>$_SERVER['PHP_SELF']
+                ];
+                ErrorLogger::log(null,$error);
                 $foundViews = [];
                 foreach ($views as $view){
                     if($view['view_url'] === '500'){
@@ -387,6 +400,12 @@ class Router
                 self::requiringFile($foundViews);
                 break;
             case 401:
+                $error = [
+                    'code'=>401,
+                    'message'=>"Unauthorized user trying to access private view",
+                    'location'=>$_SERVER['PHP_SELF']
+                ];
+                ErrorLogger::log(null,$error);
                 $foundViews = [];
                 foreach ($views as $view){
                     if($view['view_url'] === '401'){
@@ -397,6 +416,12 @@ class Router
                 self::requiringFile($foundViews);
                 break;
             case 403:
+                $error = [
+                    'code'=>403,
+                    'message'=>"Blocked user trying to use the  site",
+                    'location'=>$_SERVER['PHP_SELF']
+                ];
+                ErrorLogger::log(null,$error);
                 $foundViews = [];
                 foreach ($views as $view){
                     if($view['view_url'] === '403'){

@@ -6,10 +6,16 @@ use Core\Router;
 use Commerce\Commerce;
 use Datainterface\Tables;
 use Datainterface\Database;
+use ErrorLogger\ErrorLogger;
+use ExcelHandler\ExcelHandler;
+use Faker\FakerOrganisation;
+use Faker\FakerProducts;
+use Faker\FakerUsers;
 use GlobalsFunctions\Globals;
 use ApiHandler\ApiHandlerClass;
 use MiddlewareSecurity\Security;
 use ConfigurationSetting\ConfigureSetting;
+use MyShop\ProductRender;
 
 // enable these two line to show error on web page
 //error_reporting(E_ALL);
@@ -31,14 +37,18 @@ try{
         exit;
     }
 }catch(\Exception $e){
- Router::errorPages(500);
+    ErrorLogger::log($e);
+    Router::errorPages(500);
+    exit;
 }
 //CustomInstallation::writeComposerFile('h','h');
 
 try{
     Database::installer();
 }catch (\Exception $e){
+    ErrorLogger::log($e);
     Router::errorPages(500);
+    exit;
 }
 
 try{
@@ -69,7 +79,9 @@ try{
         }
     }
 }catch (\Exception $e){
+    ErrorLogger::log($e);
     Router::errorPages(500);
+    exit;
 }
 ?>
 <main>
@@ -86,13 +98,13 @@ try{
                 $_SESSION['message']['route'] = "";
             }
         }catch (\Exception $e){
+            ErrorLogger::log($e);
             Router::errorPages(500);
+            exit;
         }
 
         ?>
     </div>
-    <script src="Js/main.js"></script>
-    <script src="Js/addressing.js"></script>
 </main>
 <?php
 
