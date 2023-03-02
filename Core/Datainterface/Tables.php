@@ -2,6 +2,8 @@
 
 namespace Datainterface;
 
+use ErrorLogger\ErrorLogger;
+
 class Tables extends Database
 {
   public static function installTableRequired() {
@@ -82,6 +84,23 @@ class Tables extends Database
           $columns[] = $value;
       }
       return $columns;
+  }
+
+  public static function checkColumn($table, $column){
+      try {
+          $dbname = self::getDbname();
+          $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = :db AND TABLE_NAME = :t";
+          $results = Query::query($query,['db'=>$dbname,'t'=>$table]);
+          foreach ($results as $result=>$value){
+              if($value['COLUMN_NAME'] === $column){
+                 return true;
+              }
+          }
+          return false;
+      }catch (\Exception $exception){
+         ErrorLogger::log($exception);
+      }
+
   }
 
 }

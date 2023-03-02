@@ -60,9 +60,14 @@ class Security extends Globals
            return "V-VERIFIED";
        }
 
+       elseif(empty($this->currentUser[0]['verified'])){
+           return "V-NOT-VERIFIED";
+       }
+
       elseif (isset($this->currentView['view_role_access']) && $this->currentView['view_role_access'] === "moderator"){
-          return "V-VERIFIED";
+           return "V-VERIFIED";
       }
+
        return "U-COMMON";
    }
 }

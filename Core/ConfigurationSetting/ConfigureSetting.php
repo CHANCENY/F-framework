@@ -8,7 +8,7 @@ class ConfigureSetting
           "mail"=>[
               "smtp"=>"smtp.gmail.com",
               "user"=>"chance.svinfotech@gmail.com",
-              "password"=>"ggyjvxmcqvfyouwh"
+              "password"=>"neozobjecwvvrrct"
           ]
        ];
 

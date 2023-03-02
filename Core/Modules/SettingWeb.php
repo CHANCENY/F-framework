@@ -2,6 +2,8 @@
 
 namespace Modules;
 
+use MiddlewareSecurity\Security;
+
 class SettingWeb
 {
   public $settingConfigs =[
@@ -17,12 +19,22 @@ class SettingWeb
       ];
 
   public function __construct(){
-      if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Views/index.view.php')){
-          $this->settingConfigs['home']['view_path_absolute'] = $_SERVER['DOCUMENT_ROOT'].'/Views/index.view.php';
-      }
-      if(isset($this->settingConfigs['home']['view_path_absolute'])){
+
+      $security = new Security();
+      $user= $security->checkCurrentUser();
+      if($user === "U-Admin"){
+        if(isset($this->settingConfigs['home']['view_path_absolute'])){
           $this->settingConfigs['home']['view_path_absolute'] = $_SERVER['DOCUMENT_ROOT'].'/Views/DefaultViews/index.view.php';
+        }
+      }else{
+          if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Views/index.view.php')){
+              $this->settingConfigs['home']['view_path_absolute'] = $_SERVER['DOCUMENT_ROOT'].'/Views/index.view.php';
+          }
+          elseif(isset($this->settingConfigs['home']['view_path_absolute'])){
+              $this->settingConfigs['home']['view_path_absolute'] = $_SERVER['DOCUMENT_ROOT'].'/Views/DefaultViews/index.view.php';
+          }
       }
+
   }
 
   public function setSettingConfig($settingName, $setting = []){

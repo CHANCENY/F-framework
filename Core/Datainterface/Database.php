@@ -52,6 +52,8 @@ class Database
      */
     public static function getDbname()
     {
+        $dbobj = ConfigureSetting::getDatabaseConfig();
+        self::setDbname($dbobj['dbname']);
         return self::$dbname;
     }
 
@@ -153,7 +155,7 @@ class Database
            $stmt = $conn->prepare("SELECT 1 FROM cities LIMIT 1");
            $stmt->execute();
        }catch (\Exception $e){
-         
+
          $path = $_SERVER["DOCUMENT_ROOT"].'/Core/Temps/cities.sql';
          self::importTable($path);
        }

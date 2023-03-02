@@ -84,9 +84,11 @@ class Mails
            }
           return false;
        } catch (Exception $e) {
+           echo $e->getMessage();
           return false;
        }
 
 
    }
+
 }

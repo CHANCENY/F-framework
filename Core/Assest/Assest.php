@@ -105,4 +105,5 @@ class Assest
            echo $host.$_SERVER['HTTP_HOST'].'/'.$relativePath;
        }
    }
+
 }
