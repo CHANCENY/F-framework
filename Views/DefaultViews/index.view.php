@@ -3,10 +3,10 @@
 <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
         <li class="mr-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="forgot-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Forgot password</button>
         </li>
         <li class="mr-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="signingOut-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Dashboard</button>
+            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="signingOut-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Signing Out</button>
         </li>
         <li class="mr-2" role="presentation">
             <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="register-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Register account</button>
@@ -36,6 +36,8 @@
         signUp.addEventListener('click',()=> window.location.replace('registration'));
         const signOut = document.getElementById('signingOut-tab');
         signOut.addEventListener('click', ()=> window.location.replace('sign-out'));
+        const forgotP = document.getElementById('forgot-tab');
+        forgotP.addEventListener('click', ()=> window.location.replace('reset-password'));
     </script>
 </div>
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
