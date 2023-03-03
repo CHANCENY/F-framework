@@ -82,6 +82,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
                                          $option = "<option value='administrator'>Administrator</option>
                                                     <option value='private'>Private</option>
                                                    <option value='public'>Public</option>
+                                                   <option value='moderator'>Moderator</option>
                                                    ";
                                      }
                                     ?>

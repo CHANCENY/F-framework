@@ -10,10 +10,11 @@ use ApiHandler\ApiHandlerClass;
 
 $action = Globals::get('action');
 if($action === "states"){
-    $countryCode = Globals::get('code');
+    $countryCode = Globals::get('code'); 
+    $countryCode = explode('-', $countryCode);
+    $countryCode = end($countryCode);
+    $countryCode = htmlspecialchars(strip_tags($countryCode));
+    $countryCode = intval($countryCode);
     echo ApiHandlerClass::stringfiyData(CountriesModular::getStateByCountry($countryCode));
-}elseif ($action === "cities"){
-    $statescode = Globals::get('code');
-    echo ApiHandlerClass::stringfiyData(CountriesModular::getCitiesByStates($statescode));
 }
 ?>
