@@ -34,7 +34,9 @@
             "Curls\\": "Core/Curl/",
             "CustomInstallation\\": "Core/CustomInstallation/",
             "UI\\": "Core/UI/",
-            "Faker\\":"Core/Faker/"
+            "Faker\\":"Core/Faker/",
+            "ExcelHandler\\": "Core/ExcelHandler/",
+            "ErrorLogger\\": "Core/ErrorLogger/"
         }
     }
 }
