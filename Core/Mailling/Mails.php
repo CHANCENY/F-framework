@@ -1,6 +1,7 @@
 <?php
 
 namespace Mailling;
+use FormViewCreation\MailConfiguration;
 use GlobalsFunctions\Globals;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -28,11 +29,11 @@ class Mails
      *
      * ];
      */
-   public static function send($data = []){
+   public static function send($data = [], string $mailConfigName = "chance-website"){
        $mailconfig = ConfigureSetting::getConfig('mail');
 
        if(empty($mailconfig)){
-           return false;
+           $mailconfig = MailConfiguration::getMailConfiguration($mailConfigName);
        }
 
        $mail = new PHPMailer(true);
