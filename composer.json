@@ -9,7 +9,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "phpmailer/phpmailer": "^6.7"
+        "phpmailer/phpmailer": "^6.7",
+        "dompdf/dompdf": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -36,7 +37,8 @@
             "UI\\": "Core/UI/",
             "Faker\\":"Core/Faker/",
             "ExcelHandler\\": "Core/ExcelHandler/",
-            "ErrorLogger\\": "Core/ErrorLogger/"
+            "ErrorLogger\\": "Core/ErrorLogger/",
+            "PDF\\": "Core/PDF/"
         }
     }
 }

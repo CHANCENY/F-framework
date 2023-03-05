@@ -2,14 +2,17 @@
 namespace index;
 require_once  __DIR__.'/vendor/autoload.php';
 
+use Alerts\Alerts;
 use Core\Router;
 use Datainterface\Tables;
 use Datainterface\Database;
+use Dompdf\Options;
 use ErrorLogger\ErrorLogger;
 use GlobalsFunctions\Globals;
 use ApiHandler\ApiHandlerClass;
 use MiddlewareSecurity\Security;
 use ConfigurationSetting\ConfigureSetting;
+use PDF\PDF;
 
 
 // enable these two line to show error on web page
@@ -39,6 +42,7 @@ try{
 //CustomInstallation::writeComposerFile('h','h');
 
 try{
+    PDF::pdf('Hello am chance','about us','Chance Nyasulu','aboutus.pdf','landscape','A4',false,false,'database');
     Database::installer();
 }catch (\Exception $e){
     ErrorLogger::log($e);

@@ -13,7 +13,9 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'S' => 
         array (
+            'Svg\\' => 4,
             'Sessions\\' => 9,
+            'Sabberworm\\CSS\\' => 15,
         ),
         'R' => 
         array (
@@ -22,11 +24,13 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'P' => 
         array (
             'PHPMailer\\PHPMailer\\' => 20,
+            'PDF\\' => 4,
         ),
         'M' => 
         array (
             'Modules\\' => 8,
             'MiddlewareSecurity\\' => 19,
+            'Masterminds\\' => 12,
             'Manipulator\\' => 12,
             'Mailling\\' => 9,
         ),
@@ -41,6 +45,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'F' => 
         array (
             'FormViewCreation\\' => 17,
+            'FontLib\\' => 8,
             'FileHandler\\' => 12,
             'Faker\\' => 6,
         ),
@@ -51,6 +56,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         ),
         'D' => 
         array (
+            'Dompdf\\' => 7,
             'Datainterface\\' => 14,
         ),
         'C' => 
@@ -75,9 +81,17 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/UI',
         ),
+        'Svg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+        ),
         'Sessions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Sessions',
+        ),
+        'Sabberworm\\CSS\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
         'ResponseHandler\\' => 
         array (
@@ -87,6 +101,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'PDF\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/PDF',
+        ),
         'Modules\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Modules',
@@ -94,6 +112,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'MiddlewareSecurity\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Middleware',
+        ),
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
         'Manipulator\\' => 
         array (
@@ -115,6 +137,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/Forms',
         ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
         'FileHandler\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/FileHandler',
@@ -130,6 +156,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'ErrorLogger\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/ErrorLogger',
+        ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
         'Datainterface\\' => 
         array (
@@ -175,6 +205,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
