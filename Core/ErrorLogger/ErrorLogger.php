@@ -3,6 +3,7 @@
 namespace ErrorLogger;
 
 use Datainterface\Database;
+use Datainterface\Delete;
 use Datainterface\Insertion;
 use Datainterface\MysqlDynamicTables;
 use Datainterface\Selection;
@@ -77,5 +78,9 @@ class ErrorLogger
 
    public static function deleteErrors(){
        return Tables::deleteTable('errors_logs');
+   }
+
+   public static function deleteByErrorId($eid){
+       return Delete::delete('errors_logs',['eid'=>$eid]);
    }
 }
