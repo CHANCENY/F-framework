@@ -232,7 +232,7 @@ class Router
                 }
 
             } else {
-                echo "View not found";
+               self::errorPages(404);
                 exit;
             }
         }else{

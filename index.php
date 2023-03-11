@@ -16,8 +16,10 @@ use PDF\PDF;
 
 
 // enable these two line to show error on web page
-//error_reporting(E_ALL);
-//ini_set('display_errors', '1');
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+
 
 
 @session_start();
@@ -39,10 +41,7 @@ try{
     Router::errorPages(500);
     exit;
 }
-//CustomInstallation::writeComposerFile('h','h');
-
 try{
-    PDF::pdf('Hello am chance','about us','Chance Nyasulu','aboutus.pdf','landscape','A4',false,false,'database');
     Database::installer();
 }catch (\Exception $e){
     ErrorLogger::log($e);
