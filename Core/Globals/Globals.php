@@ -44,6 +44,19 @@ class Globals
      return $menus;
   }
 
+  public static function privateMenus(){
+      $menus = [];
+      if(isset($_SESSION['viewsstorage'])){
+          foreach ($_SESSION['viewsstorage'] as $view){
+              if($view['view_role_access'] === 'private'){
+                  $menus[] = $view;
+              }
+          }
+      }
+
+      return $menus;
+  }
+
   public static function findViewByUrl($url){
 
       if(isset($_SESSION['viewsstorage'])){

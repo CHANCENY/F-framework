@@ -2,6 +2,10 @@
 
 namespace ApiHandler;
 
+use Core\Router;
+use ErrorLogger\ErrorLogger;
+use GlobalsFunctions\Globals;
+
 class ApiHandlerClass
 {
     public static function headersRequest(){
@@ -55,5 +59,25 @@ class ApiHandlerClass
     public static function stringfiyData($data){
         return json_encode($data);
     }
+
+   public static function isApiCall(){
+       try{
+           $content = self::findHeaderValue('Content-Type');
+           if($content === "application/json"){
+               $url = Globals::uri();
+               $parseurl = parse_url($url, PHP_URL_PATH);
+               $parseurl = substr($parseurl, 1 , strlen($parseurl));
+               $view = Globals::findViewByUrl($parseurl);
+               if(!empty($view)){
+                   Router::requiringFile($view);
+               }
+               exit;
+           }
+       }catch(\Exception $e){
+           ErrorLogger::log($e);
+           Router::errorPages(500);
+           exit;
+       }
+   }
 
 }

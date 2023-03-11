@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit1dba5613abded84caabc95765f21e30a
 {
+    public static $files = array (
+        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'U' => 
         array (
@@ -20,6 +24,8 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'R' => 
         array (
             'ResponseHandler\\' => 16,
+            'Ramsey\\Uuid\\' => 12,
+            'Ramsey\\Collection\\' => 18,
         ),
         'P' => 
         array (
@@ -33,6 +39,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
             'Masterminds\\' => 12,
             'Manipulator\\' => 12,
             'Mailling\\' => 9,
+        ),
+        'J' => 
+        array (
+            'Json\\' => 5,
         ),
         'I' => 
         array (
@@ -68,6 +78,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
             'ConfigurationSetting\\' => 21,
             'Commerce\\' => 9,
         ),
+        'B' => 
+        array (
+            'Brick\\Math\\' => 11,
+        ),
         'A' => 
         array (
             'Assest\\' => 7,
@@ -97,6 +111,14 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         array (
             0 => __DIR__ . '/../..' . '/Core/ApiHandler',
         ),
+        'Ramsey\\Uuid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Ramsey\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/collection/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
@@ -124,6 +146,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'Mailling\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Mailling',
+        ),
+        'Json\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Json',
         ),
         'Installation\\' => 
         array (
@@ -188,6 +214,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'Commerce\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Core/Commerce',
+        ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
         ),
         'Assest\\' => 
         array (

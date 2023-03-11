@@ -10,7 +10,8 @@
     "minimum-stability": "stable",
     "require": {
         "phpmailer/phpmailer": "^6.7",
-        "dompdf/dompdf": "^2.0"
+        "dompdf/dompdf": "^2.0",
+        "ramsey/uuid": "^4.7"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +39,8 @@
             "Faker\\":"Core/Faker/",
             "ExcelHandler\\": "Core/ExcelHandler/",
             "ErrorLogger\\": "Core/ErrorLogger/",
-            "PDF\\": "Core/PDF/"
+            "PDF\\": "Core/PDF/",
+            "Json\\": "Core/Json/"
         }
     }
 }

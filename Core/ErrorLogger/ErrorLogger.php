@@ -5,6 +5,8 @@ namespace ErrorLogger;
 use Datainterface\Database;
 use Datainterface\Insertion;
 use Datainterface\MysqlDynamicTables;
+use Datainterface\Selection;
+use Datainterface\Tables;
 
 class ErrorLogger
 {
@@ -63,5 +65,17 @@ class ErrorLogger
             Insertion::insertRow('errors_logs',$data);
         }
 
+   }
+
+   public static function errors(){
+       return Selection::selectAll('errors_logs');
+   }
+
+   public static function getDetails($eid){
+       return Selection::selectById('errors_logs',['eid'=>$eid]);
+   }
+
+   public static function deleteErrors(){
+       return Tables::deleteTable('errors_logs');
    }
 }

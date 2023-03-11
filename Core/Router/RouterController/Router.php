@@ -181,9 +181,9 @@ class Router
             $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
             $host = parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
             $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-
+            $query = empty($query) ? "page={$_SERVER['PHP_SELF']}" : $query;
             parse_str($query, $list);
-            $queryList = isset($list) ? $list : [];
+            $queryList = $list ?? [];
 
             $path = $path[strlen($path) - 1] === '/' ? substr($path, 1, strlen($path) - 2) : substr($path, 1, strlen($path));
             if (SessionManager::getSession('site') === false) {

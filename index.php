@@ -10,6 +10,8 @@ use Dompdf\Options;
 use ErrorLogger\ErrorLogger;
 use GlobalsFunctions\Globals;
 use ApiHandler\ApiHandlerClass;
+use Json\Json;
+use Json\JsonOperation;
 use MiddlewareSecurity\Security;
 use ConfigurationSetting\ConfigureSetting;
 use PDF\PDF;
@@ -25,29 +27,13 @@ ini_set('display_startup_errors', TRUE);
 @session_start();
 
 try{
-    $content = ApiHandlerClass::findHeaderValue('Content-Type');
-    if($content === "application/json"){
-        $url = Globals::uri();
-        $parseurl = parse_url($url, PHP_URL_PATH);
-        $parseurl = substr($parseurl, 1 , strlen($parseurl));
-        $view = Globals::findViewByUrl($parseurl);
-        if(!empty($view)){
-            Router::requiringFile($view);
-        }
-        exit;
-    }
-}catch(\Exception $e){
-    ErrorLogger::log($e);
-    Router::errorPages(500);
-    exit;
-}
-try{
     Database::installer();
 }catch (\Exception $e){
     ErrorLogger::log($e);
     Router::errorPages(500);
     exit;
 }
+ApiHandlerClass::isApiCall();
 
 try{
     $security = new Security();
