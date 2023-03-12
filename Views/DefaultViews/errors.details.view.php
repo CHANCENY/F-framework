@@ -23,6 +23,24 @@ if(isset($user) && $user[0]['role'] === 'Admin'){
         echo \ApiHandler\ApiHandlerClass::stringfiyData(['msg'=>$message,'status'=>200]);
         exit;
     }
+    if($action === "all-delete"){
+        $user = \GlobalsFunctions\Globals::user();
+        if(!empty($user)){
+            $userEmail = $user[0]['mail'];
+            $password = $user[0]['password'];
+            $pass  =\GlobalsFunctions\Globals::get('password');
+            $useremail = \GlobalsFunctions\Globals::get('username');
+            if($userEmail === $useremail && $pass === $password && $user[0]['role'] === "Admin"){
+                $result = \ErrorLogger\ErrorLogger::deleteErrors();
+                if($result){
+                    echo \ApiHandler\ApiHandlerClass::stringfiyData(['status'=>200,'msg'=>'Cleared']);
+                    exit;
+                }
+            }
+        }
+        echo \ApiHandler\ApiHandlerClass::stringfiyData(['status'=>404,'msg'=>'failed']);
+        exit;
+    }
 
 }
 

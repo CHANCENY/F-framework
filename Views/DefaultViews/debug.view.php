@@ -25,7 +25,7 @@ $pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-
             </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="t-body-data">
         <?php $counter = 0; ?>
         <?php foreach ($pager['data'] as $error=>$value):  ?>
         <tr id="td-<?php echo $value['eid']; ?>" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -50,6 +50,9 @@ $pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-
     </table>
     <div>
         <?php echo $pager['html']; ?>
+    </div>
+    <div>
+        <button id="delete-all-error-logs" class="btn btn-danger w-100 mt-5 mb-5">Clear all error logs!</button>
     </div>
 </div>
 
@@ -92,9 +95,9 @@ $pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-
            },20000);
 
         }
-        const requestSender = (eid, action) =>{
+        const requestSender = (eid, action, extras ="") =>{
             const xhr = new XMLHttpRequest();
-            const url = window.location.protocol+'//'+window.location.hostname+'/errorhandler?action='+action+'&eid='+eid;
+            const url = window.location.protocol+'//'+window.location.hostname+'/errorhandler?action='+action+'&eid='+eid+"&"+extras;
             xhr.open('GET',url, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function (){
@@ -109,6 +112,13 @@ $pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-
                           if(td !== null){
                               td.remove();
                           }
+                       }
+                   }
+                   if(action === 'all-delete'){
+                       const data = JSON.parse(this.responseText);
+                       console.log(data);
+                       if(data.status === 200){
+                           document.getElementById('t-body-data').remove();
                        }
                    }
                }
@@ -130,7 +140,6 @@ $pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-
 
         const deleteError = ()=>{
             const deleteButton = document.getElementById('delete-error-log');
-            console.log(deleteButton);
             if(deleteButton !== null){
                 deleteButton.addEventListener('click', (e)=>{
                     requestSender(e.target.value, 'delete');
@@ -139,6 +148,16 @@ $pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-
         }
 
         setInterval(deleteError, 1000);
+
+        const clearing = document.getElementById('delete-all-error-logs');
+        clearing.addEventListener('click',(e)=>{
+            let username = prompt('Enter your username:','xxx@gmail.com');
+            let password = prompt('Enter your password:','..........');
+            if(username !== "xxx@gmail.com" && password !== ".........."){
+                const params = `username=${username}&password=${password}`;
+                requestSender('none','all-delete',params);
+            }
+        })
 
     </script>
 </div>
