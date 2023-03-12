@@ -6,6 +6,7 @@ use Datainterface\Database;
 use Datainterface\Delete;
 use Datainterface\Insertion;
 use Datainterface\MysqlDynamicTables;
+use Datainterface\Query;
 use Datainterface\Selection;
 use Datainterface\Tables;
 
@@ -69,7 +70,7 @@ class ErrorLogger
    }
 
    public static function errors(){
-       return Selection::selectAll('errors_logs');
+       return Query::query("SELECT * FROM errors_logs ORDER BY eid DESC ");
    }
 
    public static function getDetails($eid){
