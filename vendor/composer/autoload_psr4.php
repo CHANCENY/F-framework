@@ -30,6 +30,7 @@ return array(
     'ExcelHandler\\' => array($baseDir . '/Core/ExcelHandler'),
     'ErrorLogger\\' => array($baseDir . '/Core/ErrorLogger'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
+    'Datainterface\\mysql\\' => array($baseDir . '/Core/Datainterface/mysql'),
     'Datainterface\\' => array($baseDir . '/Core/Datainterface'),
     'CustomInstallation\\' => array($baseDir . '/Core/CustomInstallation'),
     'Curls\\' => array($baseDir . '/Core/Curl'),

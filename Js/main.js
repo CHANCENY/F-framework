@@ -7,8 +7,7 @@ const params = "action=pagetitle";
 xhr.open('GET', `${baseurl}Views/DefaultViews/dom-maniputor.view.php?${params}`, true);
 xhr.onload = function (){
     if(this.status === 200){
-        
-        document.getElementById('titlepage').innerText = this.responseText;
+        document.getElementById('titlepage').innerText = this.responseText === "View not found" ? window.location.hostname : this.responseText;
     }
 }
 xhr.send();

@@ -5,6 +5,12 @@ require_once __DIR__.'/settings.php';
 
 
 use Core\Router;
+use Datainterface\mysql\DeletionLayer;
+use Datainterface\mysql\InsertionLayer;
+use Datainterface\mysql\QueryLayer;
+use Datainterface\mysql\SelectionLayer;
+use Datainterface\mysql\TablesLayer;
+use Datainterface\mysql\UpdatingLayer;
 use Datainterface\Tables;
 use Datainterface\Database;
 use ErrorLogger\ErrorLogger;
@@ -22,8 +28,6 @@ if($THIS_SITE_ACCESS_LOCK === false){
 @session_start();
 
 try{
-    $data = ['id'=>1,'name'=>'chance'];
-    $store = new Store();
     Database::installer();
 }catch (\Exception $e){
     ErrorLogger::log($e);

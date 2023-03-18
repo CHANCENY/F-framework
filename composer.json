@@ -40,7 +40,8 @@
             "ExcelHandler\\": "Core/ExcelHandler/",
             "ErrorLogger\\": "Core/ErrorLogger/",
             "PDF\\": "Core/PDF/",
-            "Json\\": "Core/Json/"
+            "Json\\": "Core/Json/",
+            "Datainterface\\mysql\\": "Core/Datainterface/mysql/"
         }
     }
 }

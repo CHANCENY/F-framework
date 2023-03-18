@@ -67,6 +67,7 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'D' => 
         array (
             'Dompdf\\' => 7,
+            'Datainterface\\mysql\\' => 20,
             'Datainterface\\' => 14,
         ),
         'C' => 
@@ -186,6 +187,10 @@ class ComposerStaticInit1dba5613abded84caabc95765f21e30a
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+        'Datainterface\\mysql\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core/Datainterface/mysql',
         ),
         'Datainterface\\' => 
         array (
