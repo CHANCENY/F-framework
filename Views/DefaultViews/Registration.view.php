@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             if(!empty($user)){
                 echo \Alerts\Alerts::alert('info', "User created {$_POST['firstname']}");
                 \Sessions\SessionManager::setSession('site', true);
-                echo '<META HTTP-EQUIV="Refresh" Content="1; URL=/">';
+                \GlobalsFunctions\Globals::redirect('/');
             }else{
                 echo \Alerts\Alerts::alert('danger', "Failed to create user");
             }

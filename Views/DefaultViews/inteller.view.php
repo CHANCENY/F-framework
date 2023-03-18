@@ -14,17 +14,17 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     if(isset($_POST['site-information-continue-button'])){
         $data = [$_POST, "file"=>$_FILES ];
        echo \Alerts\Alerts::alert('info', \Installer\Installer::collectSiteInformation($data));
-       echo '<META HTTP-EQUIV="Refresh" Content="2; URL=installation">';
+       \GlobalsFunctions\Globals::redirect('installation');
     }
 
     if(isset($_POST['site-database-continue-button'])){
      echo \Alerts\Alerts::alert('info', \Installer\Installer::collectDatabaseInformation($_POST));
-     echo '<META HTTP-EQUIV="Refresh" Content="2; URL=installation">';
+        \GlobalsFunctions\Globals::redirect('installation');
     }
 
     if(isset($_POST['site-mail-end-button'])){
        echo \Alerts\Alerts::alert('info', \Installer\Installer::collectEmailPassword($_POST));
-       echo '<META HTTP-EQUIV="Refresh" Content="2; URL=installation">';
+        \GlobalsFunctions\Globals::redirect('installation');
     }
 
 }

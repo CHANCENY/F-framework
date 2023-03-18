@@ -5,6 +5,7 @@ namespace Core;
 use Alerts\Alerts;
 use ConfigurationSetting\ConfigureSetting;
 use ErrorLogger\ErrorLogger;
+use GlobalsFunctions\Globals;
 use MiddlewareSecurity\Security;
 use Modules\SettingWeb;
 use Sessions\SessionManager;
@@ -17,8 +18,14 @@ class Router
      */
     private $requestUrl;
 
+    /**
+     * @var
+     */
     private $paramsInUrl;
 
+    /**
+     * @var
+     */
     private $registeredUrl;
 
     /**
@@ -69,6 +76,10 @@ class Router
         $this->registeredUrl = $registeredUrl;
     }
 
+    /**
+     * @param $viewData
+     * @return false|string|void
+     */
     public static function addView($viewData = []){
 
         try {
@@ -151,6 +162,10 @@ class Router
 
     }
 
+    /**
+     * @param $content
+     * @return array|string|string[]|void
+     */
     public static function clearUrl($content){
 
         if(!empty($content)){
@@ -161,6 +176,10 @@ class Router
         }
     }
 
+    /**
+     * @param $view
+     * @return string
+     */
     public static function boilerpulate($view){
 
         $list = explode('.', $view);
@@ -175,6 +194,10 @@ class Router
         }
     }
 
+    /**
+     * @param $restricstionLevel
+     * @return void
+     */
     public static function router($restricstionLevel = false){
 
         if(!empty(ConfigureSetting::getDatabaseConfig())) {
@@ -253,13 +276,22 @@ class Router
         }
     }
 
+    /**
+     * @param $foundView
+     * @return void
+     */
     public static function requiringFile($foundView = []){
         $list = explode('.', $foundView['view_path_absolute']);
         $contetType = Router::headerContentType(end($list));
 
         if(file_exists($foundView['view_path_absolute'])){
             http_response_code(200);
-            require_once $foundView['view_path_absolute'];
+            global $THIS_SITE_ACCESS_LOCK;
+            if($THIS_SITE_ACCESS_LOCK === true){
+                require_once $foundView['view_path_absolute'];
+            }else{
+               die('Access denied!');
+            }
         }else{
             http_response_code(404);
             self::errorPages(404);
@@ -267,6 +299,10 @@ class Router
 
     }
 
+    /**
+     * @param $extension
+     * @return string
+     */
     public static function headerContentType($extension){
         switch ($extension){
             case 'html':
@@ -285,12 +321,20 @@ class Router
         }
     }
 
+    /**
+     * @return array|mixed
+     */
     public static function findHomePage(){
           $setting = new SettingWeb();
           return $setting->getSettingConfig('home');
 
     }
 
+    /**
+     * @param $view
+     * @param $url
+     * @return false|string|void
+     */
     public static function updateView($view, $url){
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $path = $path[strlen($path)-1] === '/' ? substr($path, 1, strlen($path) - 2) : substr($path, 1, strlen($path));
@@ -356,6 +400,10 @@ class Router
         }
     }
 
+    /**
+     * @param $code
+     * @return void
+     */
     public static function errorPages($code){
         $storage = $_SERVER['DOCUMENT_ROOT'].'/Core/Router/Register/registered_path_available.json';
         $views = json_decode(file_get_contents($storage), true);
@@ -429,6 +477,11 @@ class Router
         }
     }
 
+    /**
+     * @param $url
+     * @param $views
+     * @return array|false|mixed
+     */
     public static function findParamsCleanUrl($url, $views){
 
         $data = [];
@@ -478,6 +531,11 @@ class Router
         }
     }
 
+    /**
+     * @param $foundView
+     * @param $securityClass
+     * @return void
+     */
     public static function accessAuthenticate($foundView, $securityClass){
         $user = $securityClass->checkCurrentUser();
         if ($user === "U-Admin") {
@@ -496,6 +554,10 @@ class Router
         }
     }
 
+    /**
+     * @param $foundView
+     * @return void
+     */
     public static function viewAccessChecker($foundView){
         $security = new Security();
         $access = $security->checkViewAccess();
@@ -508,6 +570,20 @@ class Router
         }
         else {
             self::requiringFile($foundView);
+        }
+    }
+
+    /**
+     * @param string $view_url
+     * @param array $options
+     * @return void
+     */
+    public static function attachView(string $view_url, array $options = array()){
+        $view = Globals::findViewByUrl($view_url);
+        if(!empty($view)){
+            extract($options);
+            extract($view);
+            require_once $view_path_absolute;
         }
     }
 }

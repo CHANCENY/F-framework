@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
           echo \Alerts\Alerts::alert('info', "Database configured successfully");
           \Sessions\SessionManager::setSession('site', false);
           \Sessions\SessionManager::setSession('sitenew', false);
-          echo '<META HTTP-EQUIV="Refresh" Content="2; URL=registration">';
+          \GlobalsFunctions\Globals::redirect('registration');
       }else{
           echo \Alerts\Alerts::alert('warning', $result !== false ? $result : "Failed to installed database");
       }

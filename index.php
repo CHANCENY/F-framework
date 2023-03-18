@@ -1,32 +1,29 @@
 <?php
 namespace index;
 require_once  __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/settings.php';
 
-use Alerts\Alerts;
+
 use Core\Router;
 use Datainterface\Tables;
 use Datainterface\Database;
-use Dompdf\Options;
 use ErrorLogger\ErrorLogger;
-use GlobalsFunctions\Globals;
 use ApiHandler\ApiHandlerClass;
-use Json\Json;
-use Json\JsonOperation;
 use MiddlewareSecurity\Security;
 use ConfigurationSetting\ConfigureSetting;
-use PDF\PDF;
+use Sessions\Store;
 
+global $THIS_SITE_ACCESS_LOCK;
 
-// enable these two line to show error on web page
-//error_reporting(E_ALL);
-//ini_set('display_errors', TRUE);
-//ini_set('display_startup_errors', TRUE);
-
-
+if($THIS_SITE_ACCESS_LOCK === false){
+    Router::errorPages(401);
+}
 
 @session_start();
 
 try{
+    $data = ['id'=>1,'name'=>'chance'];
+    $store = new Store();
     Database::installer();
 }catch (\Exception $e){
     ErrorLogger::log($e);

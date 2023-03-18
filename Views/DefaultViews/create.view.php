@@ -1,6 +1,7 @@
 <?php
 namespace CreationView;
 use FormViewCreation\ViewCreation;
+use GlobalsFunctions\Globals;
 
 @session_start();
 
@@ -8,10 +9,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['creating-view-default'])){
         if(ViewCreation::valiadateForm($_POST)){
             viewCreation::submitForm($_SESSION['forms']['view-creation-form-data-storage']);
-            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=creating-view">';
+            Globals::redirect('creating-view');
         }else{
             $message = $_SESSION['message']['creationviewform'];
-            echo '<META HTTP-EQUIV="Refresh" Content="2; URL=creating-view">';
+            Globals::redirect('creating-view');
         }
     }
 

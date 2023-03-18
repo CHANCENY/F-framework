@@ -1,5 +1,7 @@
 <?php
 namespace GlobalsFunctions;
+use Core\Router;
+
 class Globals
 {
   public static function titleView(){
@@ -127,4 +129,5 @@ class Globals
      header("Location: {$destination}");
      exit;
   }
+
 }
