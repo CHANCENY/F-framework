@@ -100,6 +100,7 @@ class Router
             $additionalPath = $middler.'/Core/Router/Register/';
             $completePath = empty($middler) ? $baseRoot.'/Views' : $baseRoot.'/'.$middler.'/Views';
             $completePath .= $viewData['path'][0] === '/' ? $viewData['path'] : "/".$viewData['path'];
+            self::checkMultiDirectory($completePath);
             $relativePath = '/Views';
             $relativePath .= $viewData['path'][0] === '/' ? $viewData['path'] : "/".$viewData['path'];
             $storage = $baseRoot.'/'.$additionalPath.'registered_path_available.json';
@@ -173,6 +174,17 @@ class Router
             $content = str_replace('\/'," ",$content);
             $content = str_replace('/', '/', $content);
             return $content;
+        }
+    }
+
+
+    public static function checkMultiDirectory(string $completeFilePath){
+        if(!empty($completeFilePath)){
+            $list = explode('/', $completeFilePath);
+            if(count($list) >= 3){
+                $subArray = array_slice($list, 0, count($list) - 1);
+                mkdir(implode('/',$subArray),777,true);
+            }
         }
     }
 
