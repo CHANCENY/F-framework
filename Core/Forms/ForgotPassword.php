@@ -36,6 +36,7 @@ class ForgotPassword
       $con = Database::database();
       $user = Selection::selectById('users', ['uid'=>$userid]);
       $stmt = $con->prepare('UPDATE users SET password = :password WHERE uid = :uid');
+      $newpassword = password_hash($newpassword, PASSWORD_BCRYPT);
       $stmt->bindParam(':password', $newpassword);
       $stmt->bindParam(':uid', $userid);
       if($stmt->execute()){

@@ -5,7 +5,7 @@ RewriteEngine on
 
 # set write base
 
-RewriteBase /site
+RewriteBase /
 
 # delvery folder if exist
 

@@ -35,6 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         $check = \Datainterface\Selection::selectById('users', ['mail'=>htmlspecialchars(strip_tags($_POST['email']))]);
 
         if(empty($check)){
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
             $user = \Datainterface\Insertion::insertRow('users', $data);
             if(!empty($user)){
                 echo \Alerts\Alerts::alert('info', "User created {$_POST['firstname']}");

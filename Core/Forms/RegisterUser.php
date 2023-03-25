@@ -43,6 +43,7 @@ class RegisterUser
       if($maker->resolver(Database::database(),$columns,$attribute,'unverifiedusers',true)){
           $token = md5(uniqid().uniqid().uniqid());
           $url = Globals::protocal().'://'.Globals::serverHost().'/'.$verifycallbackurl.'?token='.$token;
+          $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
           $tempdata = [
               'token'=>$token,
               'tempuser'=>serialize($data),

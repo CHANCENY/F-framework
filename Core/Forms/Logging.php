@@ -26,7 +26,7 @@ class Logging
            return false;
        }
 
-       if($password === $user[0]['password']){
+       if(password_verify($password, $user[0]['password'])){
            session_regenerate_id();
            SessionManager::setNamespacedSession($user, "private_data","current_user");
            return true;
