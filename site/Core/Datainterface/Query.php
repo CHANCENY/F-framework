@@ -1,0 +1,20 @@
+<?php
+
+namespace Datainterface;
+
+class Query
+{
+  public static function query($query, $data = []){
+      $con = Database::database();
+      $stmt = $con->prepare($query);
+
+      if(!empty($data)){
+          $keys = array_keys($data);
+          for ($i = 0; $i < count($keys); $i++){
+              $stmt->bindParam(":{$keys[$i]}", $data[$keys[$i]]);
+          }
+      }
+      $stmt->execute();
+      return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+}
