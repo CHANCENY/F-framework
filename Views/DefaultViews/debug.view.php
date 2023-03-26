@@ -1,6 +1,10 @@
 <?php @session_start();
-
-$pager = \UI\Pagination::pager(\ErrorLogger\ErrorLogger::errors(),'error-errors-display');
+$errors = \ErrorLogger\ErrorLogger::errors();
+if(!empty(\GlobalsFunctions\Globals::get('q'))){
+    $term = \GlobalsFunctions\Globals::get('q');
+    $errors = \Datainterface\Searching::search($term, 'errors_logs');
+}
+$pager = \UI\Pagination::pager($errors,'error-errors-display');
 ?>
 <input type="hidden" id="input-total" name="input" value="<?php echo count($pager['data']);?>">
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
