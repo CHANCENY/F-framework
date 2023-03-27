@@ -50,7 +50,7 @@ global $placeholder;
                     default:
                         formTag = document.getElementById('form-search');
                         if(formTag !== null){
-                            formTag.action = '#';
+                            formTag.action = 'reciever';
                         }
 
                 }
@@ -63,8 +63,15 @@ global $placeholder;
                 e.preventDefault();
                 const ac = formInSelf.action;
                 const term = document.getElementById('search-dropdown').value;
-                let url = `${ac}?q=${term}`;
-                window.location.replace(url);
+                if(ac.includes('users') || ac.includes('errors')){
+                    let url = `${ac}?q=${term}`;
+                    window.location.replace(url);
+                }else{
+                    const tt = document.getElementById('table').value;
+                    const link = `${ac}?searchfor=${tt}&q=${term}`;
+                    window.location.replace(link);
+                }
+
             })
         }
     </script>

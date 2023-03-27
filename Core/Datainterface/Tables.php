@@ -2,6 +2,7 @@
 
 namespace Datainterface;
 
+use ConfigurationSetting\ConfigureSetting;
 use ErrorLogger\ErrorLogger;
 
 class Tables extends Database
@@ -23,7 +24,9 @@ class Tables extends Database
   }
 
   public static function tablesExists($tables = []) : bool {
-
+      if(empty(ConfigureSetting::getDatabaseConfig())){
+          return [];
+      }
       if(empty($tables)){
           $tables = [
               "users"

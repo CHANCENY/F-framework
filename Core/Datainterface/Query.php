@@ -2,9 +2,14 @@
 
 namespace Datainterface;
 
+use ConfigurationSetting\ConfigureSetting;
+
 class Query
 {
   public static function query($query, $data = []){
+      if(empty(ConfigureSetting::getDatabaseConfig())){
+          return [];
+      }
       $con = Database::database();
       $stmt = $con->prepare($query);
 

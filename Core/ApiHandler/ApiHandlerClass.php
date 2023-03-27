@@ -67,11 +67,12 @@ class ApiHandlerClass
                $url = Globals::uri();
                $parseurl = parse_url($url, PHP_URL_PATH);
                $parseurl = substr($parseurl, 1 , strlen($parseurl));
+               $list = strpos($parseurl, '/') ? explode('/',$parseurl) : $parseurl;
+               $parseurl = gettype($list) === "array" ? end($list) : $parseurl;
                $view = Globals::findViewByUrl($parseurl);
                if(!empty($view)){
                    Router::requiringFile($view);
                }
-               exit;
            }
        }catch(\Exception $e){
            ErrorLogger::log($e);

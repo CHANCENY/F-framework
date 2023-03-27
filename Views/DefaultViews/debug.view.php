@@ -5,8 +5,12 @@ if(!empty(\GlobalsFunctions\Globals::get('q'))){
     $errors = \Datainterface\Searching::search($term, 'errors_logs');
 }
 $pager = \UI\Pagination::pager($errors,'error-errors-display');
+global $HOME;
+
+$hostName = \GlobalsFunctions\Globals::protocal().'://'.\GlobalsFunctions\Globals::serverHost().$HOME;
 ?>
 <input type="hidden" id="input-total" name="input" value="<?php echo count($pager['data']);?>">
+<input type="hidden" value="<?php echo $hostName; ?>" id="hostnames">
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div id="popdiv"></div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -101,7 +105,11 @@ $pager = \UI\Pagination::pager($errors,'error-errors-display');
         }
         const requestSender = (eid, action, extras ="") =>{
             const xhr = new XMLHttpRequest();
-            const url = window.location.protocol+'//'+window.location.hostname+'/errorhandler?action='+action+'&eid='+eid+"&"+extras;
+            let hostName = document.getElementById('hostnames').value;
+            if(hostName.endsWith('/')){
+                hostName = hostName.slice(0,hostName.length - 1);
+            }
+            const url = hostName+'/errorhandler?action='+action+'&eid='+eid+"&"+extras;
             xhr.open('GET',url, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function (){

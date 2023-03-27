@@ -2,9 +2,14 @@
 
 namespace Datainterface;
 
+use ConfigurationSetting\ConfigureSetting;
+
 class Selection extends Database
 {
   public static function selectById($tableName, $keyValue = []) : array{
+      if(empty(ConfigureSetting::getDatabaseConfig())){
+          return [];
+      }
       $con = self::database();
       $query = "SELECT * FROM {$tableName} WHERE ".HelperClass::lineSetQuery($keyValue);
       $stmt = $con->prepare($query);
@@ -17,6 +22,9 @@ class Selection extends Database
   }
 
   public static function selectAll($tableName) : array{
+      if(empty(ConfigureSetting::getDatabaseConfig())){
+          return [];
+      }
       $con = self::database();
       $stmt = $con->prepare("SELECT * FROM {$tableName}");
       $stmt->execute();

@@ -604,7 +604,9 @@ class Router
         if(!empty($view)){
             extract($options);
             extract($view);
-            require_once $view_path_absolute;
+            if(file_exists($view_path_absolute)){
+                require_once $view_path_absolute;
+            }
         }
     }
 
