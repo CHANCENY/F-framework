@@ -28,7 +28,7 @@ class ApiHandlerClass
     }
 
     public static function getPostBody($ssoc = true){
-            return json_encode(file_get_contents('php://input'), $ssoc);
+            return json_decode(file_get_contents('php://input'), $ssoc);
     }
 
     public static function paramsQuery(){

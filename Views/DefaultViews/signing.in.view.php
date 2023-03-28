@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login-default-button']
 
    //log in below
     if(\FormViewCreation\Logging::signingIn($data['password'], ['mail'=>$data['mail']])){
-        \GlobalsFunctions\Globals::redirect('/');
+        \GlobalsFunctions\Globals::redirect(\GlobalsFunctions\Globals::home());
     }else{
         echo \Alerts\Alerts::alert('danger', "Incorrect user input try again");
     }

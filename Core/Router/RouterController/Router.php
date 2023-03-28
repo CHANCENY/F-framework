@@ -91,17 +91,9 @@ class Router
             }
 
             //start making the view here
-            $listUri = explode('/', $_SERVER['REQUEST_URI']);
             $baseRoot = $_SERVER['DOCUMENT_ROOT'];
-            $middler = "";
-            if(in_array('Views', $listUri)){
-                $middler = "";
-            }else{
-                $middler = count($listUri) > 1 ? $listUri[count($listUri) - 2] : "";
-            }
-
-            $additionalPath = $middler.'/Core/Router/Register/';
-            $completePath = empty($middler) ? $baseRoot.'/Views' : $baseRoot.'/'.$middler.'/Views';
+            $additionalPath = '/Core/Router/Register/';
+            $completePath = $baseRoot.'/Views';
             $completePath .= $viewData['path'][0] === '/' ? $viewData['path'] : "/".$viewData['path'];
             self::checkMultiDirectory($completePath);
             $relativePath = '/Views';
@@ -183,10 +175,13 @@ class Router
 
     public static function checkMultiDirectory(string $completeFilePath){
         if(!empty($completeFilePath)){
+
             $list = explode('/', $completeFilePath);
-            if(count($list) >= 3){
+            $extra = count($list) - array_search('Views', $list);
+            if($extra > 0){
                 $subArray = array_slice($list, 0, count($list) - 1);
-                mkdir(implode('/',$subArray),777,true);
+                $dir = implode('/',$subArray);
+                mkdir($dir,7777,true);
             }
         }
     }
@@ -671,5 +666,26 @@ class Router
                 }
             }
         }
+    }
+
+    public static function removeView($url){
+        if(!empty(Globals::user()) && Globals::user()[0]['role'] === 'Admin'){
+            $storage = 'Core/Router/Register/registered_path_available.json';
+            $views = json_decode(file_get_contents($storage),true);
+            $remainingView = [];
+            if(!empty($views)){
+                foreach ($views as $view=>$value){
+                    if($value['view_url'] !== $url){
+                       $remainingView[] = $value;
+                    }else{
+                        if(file_exists($value['view_path_absolute'])){
+                            unlink($value['view_path_absolute']);
+                        }
+                    }
+                }
+            }
+            return file_put_contents($storage,Router::clearUrl(json_encode($remainingView)));
+        }
+        return false;
     }
 }

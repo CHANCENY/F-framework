@@ -132,7 +132,8 @@ class Globals
 
   public static function home(){
       global $HOME;
-     return $HOME;
+      $home = $HOME[0] === '/' ? strlen($HOME) > 0 ? substr($HOME, 1) : $HOME : $HOME;
+     return $home;
   }
 
 }

@@ -172,14 +172,15 @@ class MysqlDynamicTables
      * return TRUE if table made or FALSE if not made.
      */
     public function resolver($connection, $cols = [], $attr = [], $tName = "", $defaultprimary = true){
-
-        $this->setColumnNames($cols);
-        $this->setAttributes($attr);
-        $this->setTableName($tName);
-        $this->setPrimaryColumn($defaultprimary);
-        $this->setConnection($connection);
-        return $this->create();
-
+        if(SecurityChecker::isConfigExist()){
+            $this->setColumnNames($cols);
+            $this->setAttributes($attr);
+            $this->setTableName($tName);
+            $this->setPrimaryColumn($defaultprimary);
+            $this->setConnection($connection);
+            return $this->create();
+        }
+        return false;
     }
 
 }
